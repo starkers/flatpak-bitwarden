@@ -1,0 +1,30 @@
+app-id: org.flatpak.Bitwarden
+# command: hello.sh
+command: run.sh
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=host
+  - --filesystem=home
+  - --talk-name=org.kde.StatusNotifierWatcher
+modules:
+- build-commands:
+  - ./build.sh
+  buildsystem: simple
+  name: hello
+  sources:
+  - path: org.flatpak.Bitwarden.desktop
+    type: file
+  - path: build.sh
+    type: file
+  - path: run.sh
+    type: file
+  - url:  https://github.com/bitwarden/desktop/releases/download/v1.17.2/Bitwarden-1.17.2-x86_64.AppImage
+    type: file
+    sha256: a8e22b5b0985a04d6347f2090424c5326d992e70bbadfc1561ff7b17cc385ca9
+runtime: org.gnome.Platform
+runtime-version: '3.36'
+sdk: org.gnome.Sdk
